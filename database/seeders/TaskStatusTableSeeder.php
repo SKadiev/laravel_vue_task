@@ -15,15 +15,17 @@ class TaskStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('task_status')->insert(
+        DB::table('tasks_status')->insert(
             [
-                'status_name' => 'open',
-            ],
-            [
-                'status_name' => 'completed',
-            ],
-            [
-                'status_name' => 'cancelled',
+                [
+                    'status_name' => 'open',
+                ],
+                [
+                    'status_name' => 'completed',
+                ],
+                [
+                    'status_name' => 'cancelled',
+                ]
             ]
         );
     }

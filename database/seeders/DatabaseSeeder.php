@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(AdminTestUserSeeder::class);
         $this->call(RegularlTestUserSeeder::class);
+        $this->call(TaskStatusTableSeeder::class);
     }
 }

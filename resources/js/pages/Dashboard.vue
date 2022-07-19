@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<h1>Dashboard Dashboard</h1>
-		<h4>The logged in user details Here</h4>
+		<h1>Dashboard</h1>
+		<router-link :to="{path: 'Tasks'}">Tasks</router-link>
 		<br />
 		<p>{{ user.name }}</p>
 	</div>

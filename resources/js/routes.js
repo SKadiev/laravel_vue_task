@@ -21,6 +21,7 @@ const routes = [
 		path: '/dashboard',
 		component: Dashboard,
 		name: 'Dashboard',
+		alias: '/',
 		meta: {
 			requiresAuth: true
 		}
@@ -43,6 +44,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
 		if (Auth.check()) {
+			console.log(to.path);
+			if (to.path === '/') {
+				router.push('/dashboard');
+			}
 			next();
 			return;
 		} else {

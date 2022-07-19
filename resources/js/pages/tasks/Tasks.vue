@@ -12,6 +12,7 @@
 				:task-title="task.title"
 				:task-description="task.description"
 				:tasks_status_id="task.tasks_status_id"
+				:task_expiration="task.expiration"
 			></task>
 		</div>
 	</div>
@@ -47,10 +48,10 @@ export default {
 				});
 		},
 		reverseByExpiration() {
-			this.tasks.sort((a, b) => {
-				return new Date(a.expiration) - new Date(b.expiration);
-			});
-			return this.items;
+			// this.tasks.sort((a, b) => {
+			// 	return new Date(a.expiration) - new Date(b.expiration);
+			// });
+			// return this.items;
 		}
 	},
 	mounted() {

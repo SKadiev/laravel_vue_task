@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TaskIndexResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,11 +14,11 @@ class TaskControler extends Controller
     public function index()
     {
 
-        $products = Task::orderBy('expiration', 'DESC')->get();
+        $tasks = TaskIndexResource::collection(Task::orderBy('expiration', 'DESC')->get());
         return response()->json([
             "success" => true,
             "message" => "Tasks List",
-            "data" => $products
+            "data" => $tasks
         ]);
     }
     public function store(Request $request)

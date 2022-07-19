@@ -4,6 +4,7 @@
 			<div class="collapse navbar-collapse">
 				<div class="navbar-nav" v-if="isLoggedIn">
 					<h5>Dashboard</h5>
+					
 					<a
 						href="javascript:void(0)"
 						@click="logout()"

@@ -4,7 +4,6 @@
 		<h4>The logged in user details Here</h4>
 		<br />
 		<p>{{ user.name }}</p>
-		<p>{{ user.email }}</p>
 	</div>
 </template>
 <script>

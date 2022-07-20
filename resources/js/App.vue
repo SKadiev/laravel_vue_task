@@ -3,8 +3,16 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="collapse navbar-collapse">
 				<div class="navbar-nav" v-if="isLoggedIn">
-					<h5>Dashboard</h5>
-					
+					<router-link style="padding-right: 1rem" to="/"
+						><button type="button" class="btn btn-light">
+							Home
+						</button></router-link
+					>
+					<router-link style="padding-right: 1rem" to="/tasks"
+						><button type="button" class="btn btn-light">
+							Tasks
+						</button></router-link
+					>
 					<a
 						href="javascript:void(0)"
 						@click="logout()"
@@ -56,6 +64,9 @@ export default {
 				.catch((error) => {
 					console.log(error);
 				});
+		},
+		home() {
+			this.$router.push('/');
 		}
 	},
 	inject: ['$auth'],

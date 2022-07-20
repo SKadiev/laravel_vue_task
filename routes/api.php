@@ -24,5 +24,8 @@ Route::middleware('auth:api')->group(function () {
     Route::controller(TaskControler::class)->group(function () {
         // Route::get('/tasks/{id}', 'index');
         Route::get('/tasks', 'index');
+        Route::post('/task/add', 'store');
+        Route::get('/task/edit/{task}', 'show');
+        Route::post('/task/update', 'update');
     });
 });

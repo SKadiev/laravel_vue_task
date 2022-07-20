@@ -5,6 +5,8 @@ import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
 import Dashboard from './pages/Dashboard.vue';
 import Tasks from './pages/tasks/Tasks.vue';
+import AddTask from './pages/tasks/AddTask.vue';
+import EditTask from './pages/tasks/EditTask.vue';
 
 const routes = [
 	{
@@ -30,6 +32,22 @@ const routes = [
 		path: '/tasks',
 		component: Tasks,
 		name: 'Tasks',
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/task/add',
+		component: AddTask,
+		name: 'AddTask',
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/task/edit/:id',
+		component: EditTask,
+		name: 'EditTask',
 		meta: {
 			requiresAuth: true
 		}

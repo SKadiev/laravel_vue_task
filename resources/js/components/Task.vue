@@ -3,21 +3,23 @@
 		<div class="card-body task">
 			<h5 class="card-title">{{ taskTitle }}</h5>
 			<p>{{ taskDescription }}</p>
-			<Datepicker
-				v-model="taskExpiration"
-			></Datepicker>
+			<router-link :to="{ name: 'EditTask', params: { id: id } }"
+				><button type="button" class="btn btn-primary">
+					Edit Task
+				</button></router-link
+			>
 		</div>
 	</div>
 </template>
 
 <script>
-import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
-
 export default {
-	components: { Datepicker },
+	data() {
+		return {};
+	},
 
 	props: {
+		id: Number,
 		taskTitle: String,
 		taskDescription: String,
 		tasksStatusId: {
@@ -26,14 +28,15 @@ export default {
 		},
 		taskExpiration: String
 	},
-	methods: {
-
-	}
+	methods: {}
 };
 </script>
 
 <style scoped>
 .task {
 	margin-bottom: 10px;
+}
+button {
+	margin: 10px 0;
 }
 </style>

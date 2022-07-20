@@ -1,6 +1,12 @@
 <template>
 	<h2 v-if="loading">Loading Tasks !!!!</h2>
 	<div v-else>
+		<router-link to="/task/add"
+			><button type="button" class="btn btn-primary">
+				Create Task
+			</button></router-link
+		>
+
 		<button @click="reverseByExpiration" type="button" class="btn btn-primary">
 			Reverse by expiration
 		</button>
@@ -66,3 +72,10 @@ export default {
 	}
 };
 </script>
+
+<style scoped>
+button {
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+</style>

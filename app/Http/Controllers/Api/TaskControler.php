@@ -15,8 +15,12 @@ class TaskControler extends Controller
 
     public function index()
     {
+        if (auth()->user()->isAdmin()) {
+            $tasks = TaskIndexResource::collection(Task::orderBy('expiration', 'DESC')->get());
+        } else {
+            $tasks = TaskIndexResource::collection(Task::orderBy('expiration', 'DESC')->where('user_id', auth()->user()->id)->get());
+        }
 
-        $tasks = TaskIndexResource::collection(Task::orderBy('expiration', 'DESC')->get());
         return response()->json([
             "success" => true,
             "message" => "Tasks List",

@@ -28,6 +28,7 @@ class TaskControler extends Controller
         ]);
     }
 
+
     public function show(Task $task)
     {
         return response()->json([

@@ -19,7 +19,8 @@ class TaskIndexResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'expiration' =>  Carbon::parse($this->expiration)->toDateTimeString()
+            'expiration' =>  Carbon::parse($this->expiration)->toDateTimeString(),
+            'taskStatusName' => $this->taskStatus()->first()->status_name
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskIndexResource;
 use App\Models\Task;
+use App\Models\TaskStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,9 @@ class TaskControler extends Controller
             'id' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
-            'expiration' => 'required'
+            'expiration' => 'required',
+            'tasks_status_id' => 'required'
+
         ]);
 
         if ($validator->fails()) {
@@ -89,5 +92,65 @@ class TaskControler extends Controller
             "message" => "Task created successfully.",
             "data" => $task
         ]);
+    }
+
+
+    public function sortByExpiration(String $expiration)
+    {
+
+
+        if (empty($expiration)) {
+            return response()->json([
+                'errors' => 'Expiration field empty'
+            ], 422);
+        }
+        $tasks = Task::where('expiration', '<=',  $expiration)->get();
+
+
+        if (auth()->user()->isAdmin()) {
+            $tasks = Task::where('expiration', '<=',  $expiration)->get();
+        } else {
+            $tasks =
+                Task::orderBy('expiration', 'DESC')->where('user_id', auth()->user()->id)->where('expiration', '>=',  $expiration)->get();
+        }
+
+        return response()->json([
+            "success" => true,
+            "message" => "Tasks List",
+            "data" => $tasks
+        ]);
+    }
+
+    public function taskStatusList()
+    {
+        $tasksStatusList = TaskStatus::all();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Tasks status List",
+            "data" => $tasksStatusList
+        ]);
+    }
+
+    public function searchByName(Request $request)
+    {
+        if ($request->has('username')) {
+            $username = $request->input('username');
+            $taskByName = Task::whereHas('user', function ($q) use ($username) {
+                $q->where('name', $username);
+            })->get();
+
+            return response()->json([
+                "success" => true,
+                "message" => "Task list",
+                "data" => $taskByName
+            ]);
+        } else {
+
+            return response()->json([
+                "success" => false,
+                "message" => "Wrong request",
+            ]);
+        }
     }
 }

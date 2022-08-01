@@ -26,4 +26,9 @@ class Task extends Model
     {
         return $query->orderBy('expiration', 'DESC');
     }
+
+    public function taskStatus()
+    {
+        return $this->belongsTo(TaskStatus::class, 'tasks_status_id');
+    }
 }

@@ -29,6 +29,7 @@
 		"vue-axios": "^3.4.1",
 		"vue-router": "^4.0.13",
 		"vue3-datepicker": "^0.3.4",
+		"vuedraggable": "^4.1.0",
 		"vuex": "^4.0.2"
 	}
 }

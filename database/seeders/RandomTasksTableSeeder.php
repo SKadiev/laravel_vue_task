@@ -19,7 +19,7 @@ class RandomTasksTableSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $user = User::all()->random();
             $task = Task::factory()->make();
-            $user->task()->save($task);
+            $user->tasks()->save($task);
         }
     }
 }

@@ -10,7 +10,17 @@
 			<input type="text" class="form-control" v-model="task.description" />
 		</div>
 		<Datepicker v-model="task.expiration"></Datepicker>
-
+		<div class="form-group tote" style="margin-bottom: 10px">
+			<select v-if="!loading" v-model="selected">
+				<option
+					:key="taskStatus.id"
+					v-for="taskStatus in taskStatusList"
+					:value="taskStatus.id"
+				>
+					{{ taskStatus.status_name }}
+				</option>
+			</select>
+		</div>
 		<button @click.prevent="update" type="submit" class="btn btn-primary">
 			Submit
 		</button>
@@ -27,18 +37,23 @@ export default {
 			task: {
 				title: '',
 				description: '',
-				expiration: new Date()
+				expiration: new Date(),
+				taskStatusId: null
 			},
-			loading: true
+			loading: true,
+			taskStatusList: [],
+			selected: null
 		};
 	},
 
 	mounted() {
 		this.load();
+		this.loadTaskStatusList();
 	},
 
 	methods: {
 		update() {
+			this.task.tasks_status_id = this.selected;
 			this.axios
 				.post('/api/task/update', this.task, {
 					headers: {
@@ -62,10 +77,24 @@ export default {
 					}
 				})
 				.then(({ data }) => {
-					console.log(data);
 					this.task = data.data;
-					console.log(this.task);
 					this.loading = false;
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
+		loadTaskStatusList() {
+			this.axios
+				.get('/api/tasks/statusList', {
+					headers: {
+						Authorization: 'Bearer ' + localStorage.getItem('token')
+					}
+				})
+				.then(({ data }) => {
+					this.selected = this.task.tasks_status_id;
+					this.taskStatusList = data.data;
 				})
 				.catch((error) => {
 					console.log(error);
@@ -81,5 +110,8 @@ export default {
 }
 button {
 	margin: 10px 0;
+}
+.tote {
+	margin-top: 1rem;
 }
 </style>

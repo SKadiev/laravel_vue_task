@@ -21,8 +21,6 @@
 					>
 				</div>
 				<div v-else>
-					<h5>Home</h5>
-
 					<router-link style="padding-right: 1rem" to="/login"
 						><button type="button" class="btn btn-primary">
 							Login
@@ -63,6 +61,8 @@ export default {
 				})
 				.catch((error) => {
 					console.log(error);
+					window.localStorage.clear();
+					this.$router.push('/login');
 				});
 		},
 		home() {
@@ -73,9 +73,9 @@ export default {
 
 	computed: {
 		isLoggedIn() {
-			if (localStorage.getItem('user')) {
-				return true;
-			}
+			// if (localStorage.getItem('user')) {
+			// 	return true;
+			// }
 			return this.$store.getters.isLoggedin;
 		}
 	}
